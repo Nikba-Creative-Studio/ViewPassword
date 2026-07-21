@@ -71,19 +71,16 @@ src/content.js         Toolbar UI + reveal/copy logic (injected into pages)
 src/content.css        Toolbar styles
 src/background.js       Service worker: relays keyboard shortcuts
 popup/                 Toolbar popup (on/off toggle + help)
-icons/                 App icons (+ make_icons.py generator)
+icons/                 App icons (16 / 48 / 128 px)
+docs/                  GitHub Pages site (landing page + privacy policy)
 test/test-page.html    Local page for manual testing
 ```
 
 ## Development
 
-Regenerate the icons (pure Python, no dependencies):
-
-```bash
-python3 icons/make_icons.py
-```
-
 After editing any file, reload the extension from `chrome://extensions` (click the refresh icon on the ViewPassword card).
+
+To change the icon, replace `icons/icon16.png`, `icons/icon48.png`, and `icons/icon128.png` (and `docs/icon.png` for the website), keeping the same dimensions.
 
 ## Security note
 
