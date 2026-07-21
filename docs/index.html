@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ViewPassword — Reveal &amp; Copy Passwords</title>
+    <meta
+      name="description"
+      content="A minimal Chrome extension that lets you reveal and copy any password field with one click. 100% local — no data ever leaves your browser. By Nikba Creative Studio."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230a84ff'/%3E%3Cpath d='M4 12s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z' fill='white'/%3E%3Ccircle cx='12' cy='12' r='2.4' fill='%230a84ff'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --blue: #0a84ff;
+        --blue-dark: #0060df;
+        --bg: #ffffff;
+        --fg: #1c1c1e;
+        --muted: #6b6b70;
+        --card: #f7f7fa;
+        --border: #e5e5ea;
+        --radius: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f0f11;
+          --fg: #f2f2f7;
+          --muted: #9a9aa0;
+          --card: #1b1b1f;
+          --border: #2c2c30;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        color: var(--fg);
+        background: var(--bg);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Header */
+      header {
+        border-bottom: 1px solid var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 17px;
+        color: var(--fg);
+      }
+      .brand svg {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 22px;
+        font-size: 14px;
+      }
+      .nav-links a {
+        color: var(--muted);
+      }
+
+      /* Hero */
+      .hero {
+        text-align: center;
+        padding: 72px 0 56px;
+      }
+      .hero .icon {
+        width: 88px;
+        height: 88px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(10, 132, 255, 0.28);
+        margin-bottom: 28px;
+      }
+      .hero h1 {
+        font-size: clamp(30px, 6vw, 46px);
+        line-height: 1.1;
+        margin: 0 0 16px;
+        letter-spacing: -0.02em;
+      }
+      .hero p.lead {
+        font-size: clamp(16px, 2.5vw, 20px);
+        color: var(--muted);
+        max-width: 620px;
+        margin: 0 auto 32px;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        padding: 13px 26px;
+        border-radius: 999px;
+        transition: background 0.15s ease, transform 0.15s ease;
+      }
+      .cta:hover {
+        background: var(--blue-dark);
+        text-decoration: none;
+        transform: translateY(-1px);
+      }
+      .cta.secondary {
+        background: transparent;
+        color: var(--fg);
+        border: 1px solid var(--border);
+        margin-left: 10px;
+      }
+      .cta.secondary:hover {
+        background: var(--card);
+      }
+      .badge {
+        display: inline-block;
+        margin-top: 22px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .badge strong {
+        color: var(--fg);
+      }
+
+      /* Features */
+      section {
+        padding: 56px 0;
+        border-top: 1px solid var(--border);
+      }
+      h2 {
+        font-size: 26px;
+        letter-spacing: -0.01em;
+        margin: 0 0 8px;
+        text-align: center;
+      }
+      .section-sub {
+        text-align: center;
+        color: var(--muted);
+        margin: 0 auto 40px;
+        max-width: 560px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 22px;
+      }
+      .card .emoji {
+        font-size: 24px;
+      }
+      .card h3 {
+        margin: 12px 0 6px;
+        font-size: 17px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14.5px;
+      }
+
+      /* Steps */
+      ol.steps {
+        max-width: 620px;
+        margin: 0 auto;
+        padding-left: 22px;
+      }
+      ol.steps li {
+        margin: 10px 0;
+      }
+      code,
+      kbd {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1px 6px;
+      }
+
+      /* Privacy callout */
+      .privacy {
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 132, 255, 0.08),
+          transparent
+        );
+      }
+      .privacy .pill {
+        display: inline-block;
+        background: rgba(52, 199, 89, 0.15);
+        color: #248a3d;
+        font-weight: 600;
+        font-size: 13px;
+        padding: 5px 14px;
+        border-radius: 999px;
+        margin-bottom: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        .privacy .pill {
+          color: #30d158;
+        }
+      }
+
+      /* Footer */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 34px 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      footer .links {
+        margin-bottom: 12px;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <span class="brand">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="5" fill="#0a84ff" />
+            <path d="M4 12s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z" fill="#fff" />
+            <circle cx="12" cy="12" r="2.4" fill="#0a84ff" />
+          </svg>
+          ViewPassword
+        </span>
+        <span class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#install">Install</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="https://github.com/Nikba-Creative-Studio/ViewPassword"
+            >GitHub</a
+          >
+        </span>
+      </nav>
+    </header>
+
+    <main class="wrap">
+      <!-- Hero -->
+      <div class="hero">
+        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="5" fill="#0a84ff" />
+          <path d="M4 12s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z" fill="#fff" />
+          <circle cx="12" cy="12" r="2.4" fill="#0a84ff" />
+        </svg>
+        <h1>Reveal &amp; copy any password field, instantly</h1>
+        <p class="lead">
+          ViewPassword adds a tiny toolbar beside password fields so you can show
+          or copy their value with one click — no digging through your password
+          manager.
+        </p>
+        <a
+          class="cta"
+          href="https://github.com/Nikba-Creative-Studio/ViewPassword"
+          >Get it on GitHub</a
+        >
+        <a class="cta secondary" href="#install">How to install</a>
+        <div class="badge">
+          <strong>100% local</strong> — no network access, no data collected.
+        </div>
+      </div>
+    </main>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="wrap">
+        <h2>Everything you need, nothing you don't</h2>
+        <p class="section-sub">
+          A focused tool that does one thing well and stays out of your way.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <div class="emoji">📋</div>
+            <h3>One-click copy</h3>
+            <p>
+              Copy a password field's value straight to your clipboard, with a
+              clear confirmation.
+            </p>
+          </div>
+          <div class="card">
+            <div class="emoji">👁️</div>
+            <h3>Reveal &amp; hide</h3>
+            <p>Toggle any password between hidden dots and plain text.</p>
+          </div>
+          <div class="card">
+            <div class="emoji">⌨️</div>
+            <h3>Keyboard shortcuts</h3>
+            <p>
+              Copy with <kbd>Ctrl/Cmd</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>, reveal
+              with <kbd>Ctrl/Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Y</kbd>.
+            </p>
+          </div>
+          <div class="card">
+            <div class="emoji">✨</div>
+            <h3>Works everywhere</h3>
+            <p>
+              Handles auto-filled passwords and modern single-page apps where
+              fields load dynamically.
+            </p>
+          </div>
+          <div class="card">
+            <div class="emoji">🔒</div>
+            <h3>Private by design</h3>
+            <p>
+              Runs entirely in your browser. No servers, no tracking, no data
+              ever leaves your device.
+            </p>
+          </div>
+          <div class="card">
+            <div class="emoji">🎛️</div>
+            <h3>On/off switch</h3>
+            <p>Enable or disable ViewPassword anytime from the popup.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section id="install">
+      <div class="wrap">
+        <h2>Install in under a minute</h2>
+        <p class="section-sub">Load the unpacked extension in Chrome or Edge.</p>
+        <ol class="steps">
+          <li>
+            Download or clone the
+            <a href="https://github.com/Nikba-Creative-Studio/ViewPassword"
+              >GitHub repository</a
+            >.
+          </li>
+          <li>Open <code>chrome://extensions</code> (or <code>edge://extensions</code>).</li>
+          <li>Enable <strong>Developer mode</strong> (top-right toggle).</li>
+          <li>Click <strong>Load unpacked</strong> and select the project folder.</li>
+          <li>Hover a password field — the copy &amp; reveal icons appear beside it.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="privacy">
+      <div class="wrap">
+        <span class="pill">🔒 Zero data collection</span>
+        <h2>Your passwords never leave your browser</h2>
+        <p class="section-sub">
+          ViewPassword requests no network permissions. It reads a field's value
+          only when you click copy or reveal, and uses it solely for the
+          clipboard or on-screen toggle. It cannot access passwords stored inside
+          Chrome's encrypted password manager.
+        </p>
+        <a class="cta secondary" href="privacy.html">Read the full privacy policy</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="https://github.com/Nikba-Creative-Studio/ViewPassword">GitHub</a>
+          <a href="https://www.nikba.com">Nikba Creative Studio</a>
+        </div>
+        <div>
+          © 2026 <a href="https://www.nikba.com">Nikba Creative Studio</a>. Released
+          under the MIT License.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
