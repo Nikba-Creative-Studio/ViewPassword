@@ -9,6 +9,8 @@
 
 Everything runs **100% locally**. The extension has **no network access**, and no field value ever leaves your browser.
 
+🌐 **Website:** https://nikba-creative-studio.github.io/ViewPassword/ · 🔒 **Privacy Policy:** https://nikba-creative-studio.github.io/ViewPassword/privacy.html
+
 ---
 
 ## Features
@@ -85,6 +87,12 @@ To change the icon, replace `icons/icon16.png`, `icons/icon48.png`, and `icons/i
 ## Security note
 
 ViewPassword can read the value of password fields on any page, so the code is kept minimal and auditable. Review [`src/content.js`](src/content.js) before installing — it is the only file that touches field values, and it never transmits them.
+
+## Links
+
+- **Website:** [nikba-creative-studio.github.io/ViewPassword](https://nikba-creative-studio.github.io/ViewPassword/)
+- **Privacy Policy:** [privacy.html](https://nikba-creative-studio.github.io/ViewPassword/privacy.html)
+- **Source:** [github.com/Nikba-Creative-Studio/ViewPassword](https://github.com/Nikba-Creative-Studio/ViewPassword)
 
 ## Author
 
