@@ -9,7 +9,7 @@
 
 Everything runs **100% locally**. The extension has **no network access**, and no field value ever leaves your browser.
 
-🌐 **Website:** https://nikba-creative-studio.github.io/ViewPassword/ · 🔒 **Privacy Policy:** https://nikba-creative-studio.github.io/ViewPassword/privacy.html
+🛒 **Chrome Web Store:** https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea · 🌐 **Website:** https://nikba-creative-studio.github.io/ViewPassword/ · 🔒 **Privacy Policy:** https://nikba-creative-studio.github.io/ViewPassword/privacy.html
 
 ---
 
@@ -28,12 +28,18 @@ Everything runs **100% locally**. The extension has **no network access**, and n
 - ✅ Reveal or copy a password **present in a page's password field** — whether you typed it or the browser auto-filled it.
 - ❌ It **cannot** read passwords stored inside Chrome's password manager. Those are encrypted and sandboxed — no extension can access them. ViewPassword only works with the value currently loaded in the page.
 
-## Install (unpacked)
+## Install
+
+### From the Chrome Web Store (recommended)
+
+Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea).
+
+### Manually (unpacked)
 
 1. Open `chrome://extensions` (or `edge://extensions`).
 2. Enable **Developer mode** (top-right toggle).
 3. Click **Load unpacked** and select this project folder.
-4. The ViewPassword eye icon appears in the toolbar.
+4. The ViewPassword icon appears in the toolbar.
 
 To test it, open [`test/test-page.html`](test/test-page.html) in your browser and hover a password field.
 
@@ -90,6 +96,7 @@ ViewPassword can read the value of password fields on any page, so the code is k
 
 ## Links
 
+- **Chrome Web Store:** [ViewPassword](https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea)
 - **Website:** [nikba-creative-studio.github.io/ViewPassword](https://nikba-creative-studio.github.io/ViewPassword/)
 - **Privacy Policy:** [privacy.html](https://nikba-creative-studio.github.io/ViewPassword/privacy.html)
 - **Source:** [github.com/Nikba-Creative-Studio/ViewPassword](https://github.com/Nikba-Creative-Studio/ViewPassword)
