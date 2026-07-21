@@ -1,0 +1,47 @@
+/* ViewPassword — floating toolbar styles. Scoped under .vp-toolbar to avoid
+   leaking into host pages. */
+
+.vp-toolbar {
+  position: fixed;
+  z-index: 2147483647; /* stay above host-page overlays */
+  display: none;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  background: rgba(28, 28, 30, 0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(4px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 0;
+  user-select: none;
+}
+
+.vp-toolbar.vp-visible {
+  display: flex;
+}
+
+.vp-toolbar .vp-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  color: #f2f2f7;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.vp-toolbar .vp-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.vp-toolbar .vp-btn.vp-copied {
+  color: #34c759;
+}
+
+.vp-toolbar .vp-btn svg {
+  pointer-events: none;
+}

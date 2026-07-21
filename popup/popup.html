@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>ViewPassword</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title">ViewPassword</h1>
+      <label class="switch" title="Enable or disable ViewPassword">
+        <input type="checkbox" id="toggle" />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <p class="status" id="status">Enabled</p>
+
+    <section class="help">
+      <p>Hover or focus any password field to show the toolbar:</p>
+      <ul>
+        <li><strong>Eye</strong> — show or hide the value</li>
+        <li><strong>Copy</strong> — copy the value to the clipboard</li>
+      </ul>
+      <p class="shortcuts">Shortcuts (on a focused field):</p>
+      <ul>
+        <li><kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> — copy</li>
+        <li><kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Y</kbd> — show/hide</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p class="privacy">Runs 100% locally — no data ever leaves your browser.</p>
+      <p class="author">
+        by
+        <a href="https://www.nikba.com" target="_blank" rel="noopener noreferrer">
+          Nikba Creative Studio
+        </a>
+      </p>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
