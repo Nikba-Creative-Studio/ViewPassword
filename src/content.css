@@ -34,6 +34,10 @@
   transition: background 0.12s ease, color 0.12s ease;
 }
 
+.vp-toolbar .vp-btn[hidden] {
+  display: none;
+}
+
 .vp-toolbar .vp-btn:hover {
   background: rgba(255, 255, 255, 0.16);
 }

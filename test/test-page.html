@@ -14,7 +14,7 @@
       }
       h1 { font-size: 20px; }
       label { display: block; margin: 16px 0 4px; font-weight: 600; }
-      input {
+      input, select {
         width: 100%;
         padding: 10px 12px;
         font-size: 14px;
@@ -50,6 +50,13 @@
 
       <label for="pw2">Confirm password</label>
       <input id="pw2" type="password" value="S3cr3t-Pa55w0rd!" autocomplete="new-password" />
+
+      <label for="environment">Environment</label>
+      <select id="environment">
+        <option value="dev-eu">Development (Europe)</option>
+        <option value="staging-us" selected>Staging (US)</option>
+        <option value="production">Production</option>
+      </select>
     </form>
 
     <button class="add" id="add">Add a dynamic password field</button>

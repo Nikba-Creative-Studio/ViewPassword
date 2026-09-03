@@ -1,6 +1,6 @@
 # ViewPassword
 
-> Reveal and copy the value of any password field with one click — no need to open your browser's password manager.
+> Reveal passwords and copy values from password or select fields with one click.
 
 **ViewPassword** is a lightweight Chrome/Edge extension (Manifest V3). A small toolbar appears beside any password field so you can instantly copy or reveal its value.
 
@@ -21,6 +21,7 @@ Everything runs **100% locally**. The extension has **no network access**, and n
 - **Dynamic pages supported** — works on SPA / React logins where fields appear after load.
 - **Keyboard shortcuts** — copy or reveal without touching the mouse.
 - **Global on/off toggle** — enable or disable from the popup.
+- **Copy select values** — copy the selected option's `value`, controlled by a separate popup toggle.
 - **Private by design** — no host network permissions; nothing is ever transmitted.
 
 ## What it can and cannot do
@@ -46,12 +47,13 @@ To test it, open [`test/test-page.html`](test/test-page.html) in your browser an
 ## Usage
 
 - Hover or focus any password field → the **copy** and **eye** icons appear beside it.
+- Hover or focus a select field → the **copy** icon appears beside it when the feature is enabled.
 - Click **copy** to copy the value (a green ✓ confirms), or the **eye** to reveal / hide it.
 - Click the extension icon to open the popup and toggle ViewPassword on or off.
 
 ### Keyboard shortcuts
 
-When a password field is focused:
+When a supported field is focused (copy also works for enabled select fields):
 
 | Action        | Windows / Linux | macOS         |
 | ------------- | --------------- | ------------- |

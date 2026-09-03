@@ -10,6 +10,7 @@
 
   const REVEALED = new WeakSet(); // password fields currently shown as text
   let enabled = true; // global on/off, controlled from the popup
+  let copySelectEnabled = true; // copy tool for select fields
   let toolbar = null; // single reusable toolbar element
   let currentField = null; // field the toolbar is anchored to
   let hideTimer = null;
@@ -29,6 +30,14 @@
       el.tagName === "INPUT" &&
       (el.type === "password" || REVEALED.has(el))
     );
+  }
+
+  function isSelectField(el) {
+    return el && el.tagName === "SELECT";
+  }
+
+  function isSupportedField(el) {
+    return isPasswordField(el) || (copySelectEnabled && isSelectField(el));
   }
 
   function buildToolbar() {
@@ -78,10 +87,20 @@
     return toolbar;
   }
 
-  function syncRevealIcon() {
+  function syncToolbar() {
     if (!toolbar || !currentField) return;
-    const btn = toolbar.querySelector(".vp-reveal");
-    btn.innerHTML = REVEALED.has(currentField) ? SVG.eyeOff : SVG.eye;
+    const revealBtn = toolbar.querySelector(".vp-reveal");
+    const copyBtn = toolbar.querySelector(".vp-copy");
+    const selectField = isSelectField(currentField);
+    revealBtn.hidden = selectField;
+    copyBtn.title = selectField ? "Copy selected value" : "Copy password";
+    copyBtn.setAttribute(
+      "aria-label",
+      selectField ? "Copy selected value" : "Copy password"
+    );
+    if (!selectField) {
+      revealBtn.innerHTML = REVEALED.has(currentField) ? SVG.eyeOff : SVG.eye;
+    }
   }
 
   function positionToolbar() {
@@ -113,12 +132,12 @@
   }
 
   function showToolbarFor(field) {
-    if (!enabled || !isPasswordField(field)) return;
+    if (!enabled || !isSupportedField(field)) return;
     clearTimeout(hideTimer);
     currentField = field;
     ensureToolbar();
     toolbar.classList.add("vp-visible");
-    syncRevealIcon();
+    syncToolbar();
     positionToolbar();
   }
 
@@ -140,7 +159,7 @@
       field.type = "text";
       REVEALED.add(field);
     }
-    syncRevealIcon();
+    syncToolbar();
   }
 
   async function copyValue(field, btn) {
@@ -183,12 +202,12 @@
   // --- Event wiring -------------------------------------------------------
 
   function onPointerOver(e) {
-    const field = e.target.closest && e.target.closest("input");
-    if (isPasswordField(field)) showToolbarFor(field);
+    const field = e.target.closest && e.target.closest("input, select");
+    if (isSupportedField(field)) showToolbarFor(field);
   }
 
   function onFocusIn(e) {
-    if (isPasswordField(e.target)) showToolbarFor(e.target);
+    if (isSupportedField(e.target)) showToolbarFor(e.target);
   }
 
   document.addEventListener("pointerover", onPointerOver, true);
@@ -203,25 +222,32 @@
   // --- Keyboard commands (from background) --------------------------------
 
   chrome.runtime.onMessage.addListener((msg) => {
+    if (!enabled) return;
     const field = document.activeElement;
-    if (!isPasswordField(field)) return;
     if (msg === "copy-focused-password") {
+      if (!isSupportedField(field)) return;
       copyValue(field, null);
     } else if (msg === "toggle-focused-password") {
+      if (!isPasswordField(field)) return;
       toggleReveal(field);
-      if (currentField === field) syncRevealIcon();
+      if (currentField === field) syncToolbar();
     }
   });
 
   // --- Global enable/disable state ----------------------------------------
 
-  chrome.storage?.local.get({ enabled: true }, (res) => {
+  chrome.storage?.local.get({ enabled: true, copySelectEnabled: true }, (res) => {
     enabled = res.enabled !== false;
+    copySelectEnabled = res.copySelectEnabled !== false;
   });
   chrome.storage?.onChanged.addListener((changes) => {
     if (changes.enabled) {
       enabled = changes.enabled.newValue !== false;
       if (!enabled) hideToolbar();
+    }
+    if (changes.copySelectEnabled) {
+      copySelectEnabled = changes.copySelectEnabled.newValue !== false;
+      if (!copySelectEnabled && isSelectField(currentField)) hideToolbar();
     }
   });
 })();

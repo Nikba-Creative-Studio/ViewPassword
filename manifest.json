@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "ViewPassword",
-  "version": "1.0.0",
-  "description": "Reveal and copy the value of any password field with one click. 100% local, no network access.",
+  "version": "1.1.0",
+  "description": "Reveal passwords and copy values from password and select fields with one click. 100% local.",
   "author": "Nikba Creative Studio",
   "homepage_url": "https://www.nikba.com",
   "permissions": ["clipboardWrite", "storage", "activeTab"],
@@ -38,7 +38,7 @@
         "default": "Ctrl+Shift+C",
         "mac": "Command+Shift+C"
       },
-      "description": "Copy the value of the focused password field"
+      "description": "Copy the value of the focused password or select field"
     },
     "toggle-focused-password": {
       "suggested_key": {
