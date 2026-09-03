@@ -6,7 +6,7 @@
     <title>ViewPassword — Reveal &amp; Copy Passwords</title>
     <meta
       name="description"
-      content="A minimal Chrome extension that lets you reveal and copy any password field with one click. 100% local — no data ever leaves your browser. By Nikba Creative Studio."
+      content="A private Chrome, Edge, and Firefox extension for revealing passwords and copying values from password or select fields. 100% local."
     />
     <link rel="icon" type="image/png" href="icon.png" />
     <style>
@@ -141,6 +141,15 @@
       .cta.secondary:hover {
         background: var(--card);
       }
+      .cta-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .cta-group .cta.secondary {
+        margin-left: 0;
+      }
       .badge {
         display: inline-block;
         margin-top: 22px;
@@ -200,6 +209,27 @@
       }
       ol.steps li {
         margin: 10px 0;
+      }
+      .install-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .install-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        text-align: center;
+      }
+      .install-card h3 {
+        margin: 0 0 8px;
+      }
+      .install-card p {
+        color: var(--muted);
+        margin: 0 0 18px;
       }
       code,
       kbd {
@@ -275,22 +305,29 @@
       <!-- Hero -->
       <div class="hero">
         <img class="icon" src="icon.png" alt="ViewPassword icon" />
-        <h1>Reveal &amp; copy any password field, instantly</h1>
+        <h1>Reveal passwords &amp; copy field values, instantly</h1>
         <p class="lead">
-          ViewPassword adds a tiny toolbar beside password fields so you can show
-          or copy their value with one click — no digging through your password
-          manager.
+          ViewPassword adds a tiny toolbar beside password and select fields.
+          Reveal a password or copy the current value with one click — now for
+          Chrome, Edge, Firefox Desktop, and Firefox for Android.
         </p>
-        <a
-          class="cta"
-          href="https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea"
-          >Add to Chrome</a
-        >
-        <a
-          class="cta secondary"
-          href="https://github.com/Nikba-Creative-Studio/ViewPassword"
-          >View on GitHub</a
-        >
+        <div class="cta-group">
+          <a
+            class="cta"
+            href="https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea"
+            >Add to Chrome</a
+          >
+          <a
+            class="cta"
+            href="https://addons.mozilla.org/en-US/firefox/addon/viewpassword/"
+            >Add to Firefox</a
+          >
+          <a
+            class="cta secondary"
+            href="https://github.com/Nikba-Creative-Studio/ViewPassword"
+            >View on GitHub</a
+          >
+        </div>
         <div class="badge">
           <strong>100% local</strong> — no network access, no data collected.
         </div>
@@ -309,8 +346,8 @@
             <div class="emoji">📋</div>
             <h3>One-click copy</h3>
             <p>
-              Copy a password field's value straight to your clipboard, with a
-              clear confirmation.
+              Copy the current value of a password or select field straight to
+              your clipboard, with a clear confirmation.
             </p>
           </div>
           <div class="card">
@@ -327,11 +364,11 @@
             </p>
           </div>
           <div class="card">
-            <div class="emoji">✨</div>
-            <h3>Works everywhere</h3>
+            <div class="emoji">🦊</div>
+            <h3>Chrome &amp; Firefox</h3>
             <p>
-              Handles auto-filled passwords and modern single-page apps where
-              fields load dynamically.
+              Available for Chrome, Edge, Firefox Desktop, and Firefox for
+              Android from their official stores.
             </p>
           </div>
           <div class="card">
@@ -344,8 +381,11 @@
           </div>
           <div class="card">
             <div class="emoji">🎛️</div>
-            <h3>On/off switch</h3>
-            <p>Enable or disable ViewPassword anytime from the popup.</p>
+            <h3>Independent controls</h3>
+            <p>
+              Enable or disable the extension and select-value copying from the
+              popup.
+            </p>
           </div>
         </div>
       </div>
@@ -356,23 +396,28 @@
       <div class="wrap">
         <h2>Install in under a minute</h2>
         <p class="section-sub">
-          The easiest way is straight from the
-          <a href="https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea"
-            >Chrome Web Store</a
-          >. Prefer to load it manually? Follow the steps below.
+          Install ViewPassword from your browser's official extension store.
         </p>
-        <ol class="steps">
-          <li>
-            Download or clone the
-            <a href="https://github.com/Nikba-Creative-Studio/ViewPassword"
-              >GitHub repository</a
-            >.
-          </li>
-          <li>Open <code>chrome://extensions</code> (or <code>edge://extensions</code>).</li>
-          <li>Enable <strong>Developer mode</strong> (top-right toggle).</li>
-          <li>Click <strong>Load unpacked</strong> and select the project folder.</li>
-          <li>Hover a password field — the copy &amp; reveal icons appear beside it.</li>
-        </ol>
+        <div class="install-grid">
+          <div class="install-card">
+            <h3>Chrome &amp; Edge</h3>
+            <p>Install the latest stable version from the Chrome Web Store.</p>
+            <a
+              class="cta"
+              href="https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea"
+              >Chrome Web Store</a
+            >
+          </div>
+          <div class="install-card">
+            <h3>Firefox</h3>
+            <p>Available for Firefox Desktop and Firefox for Android.</p>
+            <a
+              class="cta"
+              href="https://addons.mozilla.org/en-US/firefox/addon/viewpassword/"
+              >Firefox Add-ons</a
+            >
+          </div>
+        </div>
       </div>
     </section>
 
@@ -385,7 +430,7 @@
           ViewPassword requests no network permissions. It reads a field's value
           only when you click copy or reveal, and uses it solely for the
           clipboard or on-screen toggle. It cannot access passwords stored inside
-          Chrome's encrypted password manager.
+          your browser's encrypted password manager.
         </p>
         <a class="cta secondary" href="privacy.html">Read the full privacy policy</a>
       </div>
@@ -395,6 +440,7 @@
       <div class="wrap">
         <div class="links">
           <a href="privacy.html">Privacy Policy</a>
+          <a href="https://addons.mozilla.org/en-US/firefox/addon/viewpassword/">Firefox Add-ons</a>
           <a href="https://github.com/Nikba-Creative-Studio/ViewPassword">GitHub</a>
           <a href="https://www.nikba.com">Nikba Creative Studio</a>
         </div>

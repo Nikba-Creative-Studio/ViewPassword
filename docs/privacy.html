@@ -140,7 +140,7 @@
 
     <main class="wrap">
       <h1>Privacy Policy</h1>
-      <p class="updated">Last updated: 21 July 2026</p>
+      <p class="updated">Last updated: 3 September 2026</p>
 
       <div class="highlight">
         <strong>Summary:</strong> ViewPassword does not collect, store, transmit,
@@ -170,14 +170,14 @@
 
       <h2>3. How the extension works</h2>
       <p>
-        ViewPassword places a small toolbar next to password fields on web pages.
-        When you explicitly click the copy or reveal button — or press the
-        corresponding keyboard shortcut — the extension reads the value of that
-        one password field solely to:
+        ViewPassword places a small toolbar next to password and select fields on
+        web pages. When you explicitly click the copy or reveal button — or press
+        the corresponding keyboard shortcut — the extension reads the current
+        value of that one field solely to:
       </p>
       <ul>
         <li>copy it to your device's clipboard, or</li>
-        <li>toggle it between hidden and visible on screen.</li>
+        <li>toggle a password between hidden and visible on screen.</li>
       </ul>
       <p>
         This value is used only at that moment and on your device. It is never
@@ -186,9 +186,10 @@
 
       <h2>4. Local storage</h2>
       <p>
-        The extension saves a single preference locally — whether it is enabled or
-        disabled — using the browser's local storage. This setting stays on your
-        device and contains no personal information.
+        The extension saves two preferences locally — whether the extension is
+        enabled and whether copying select values is enabled — using the browser's
+        local storage. These settings stay on your device and contain no personal
+        information.
       </p>
 
       <h2>5. Permissions</h2>
@@ -200,7 +201,7 @@
         </tr>
         <tr>
           <td><code>clipboardWrite</code></td>
-          <td>Copy a password field's value to your clipboard when you ask.</td>
+          <td>Copy a password or select field's value when you ask.</td>
         </tr>
         <tr>
           <td><code>storage</code></td>
@@ -213,7 +214,7 @@
         <tr>
           <td>Host access (all sites)</td>
           <td>
-            Show the toolbar on password fields regardless of which site you are
+            Show the toolbar on supported fields regardless of which site you are
             on. No page content is read or transmitted except a field's value at
             the moment you click copy or reveal.
           </td>

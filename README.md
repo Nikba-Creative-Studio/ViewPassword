@@ -2,14 +2,14 @@
 
 > Reveal passwords and copy values from password or select fields with one click.
 
-**ViewPassword** is a lightweight Chrome/Edge extension (Manifest V3). A small toolbar appears beside any password field so you can instantly copy or reveal its value.
+**ViewPassword** is a lightweight Chrome, Edge, and Firefox extension (Manifest V3). A small toolbar appears beside supported fields so you can instantly copy or reveal their value.
 
 - 📋 **Copy** — copy the field value to the clipboard
 - 👁 **Eye** — show / hide the field value
 
 Everything runs **100% locally**. The extension has **no network access**, and no field value ever leaves your browser.
 
-🛒 **Chrome Web Store:** https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea · 🌐 **Website:** https://nikba-creative-studio.github.io/ViewPassword/ · 🔒 **Privacy Policy:** https://nikba-creative-studio.github.io/ViewPassword/privacy.html
+🛒 **Chrome Web Store:** https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea · 🦊 **Firefox Add-ons:** https://addons.mozilla.org/en-US/firefox/addon/viewpassword/ · 🌐 **Website:** https://nikba-creative-studio.github.io/ViewPassword/
 
 ---
 
@@ -35,6 +35,11 @@ Everything runs **100% locally**. The extension has **no network access**, and n
 
 Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea).
 
+### From Firefox Add-ons
+
+Install the signed version for Firefox Desktop or Android from
+[Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/viewpassword/).
+
 ### Manually (unpacked)
 
 1. Open `chrome://extensions` (or `edge://extensions`).
@@ -43,6 +48,16 @@ Install directly from the [Chrome Web Store](https://chromewebstore.google.com/d
 4. The ViewPassword icon appears in the toolbar.
 
 To test it, open [`test/test-page.html`](test/test-page.html) in your browser and hover a password field.
+
+### Firefox (temporary installation)
+
+1. Run `./scripts/build-firefox.sh`.
+2. Open `about:debugging#/runtime/this-firefox` in Firefox.
+3. Choose **Load Temporary Add-on** and select the generated ZIP from `dist/`.
+
+For Mozilla Add-ons submission, upload the same generated ZIP. The Firefox
+manifest declares that the extension collects no data and uses a non-persistent
+Manifest V3 background script.
 
 ## Usage
 
@@ -77,6 +92,8 @@ There are **no** network permissions — the extension cannot send data anywhere
 
 ```
 manifest.json          Extension manifest (MV3)
+firefox/manifest.json  Firefox-specific manifest and AMO metadata
+scripts/               Browser-specific packaging scripts
 src/content.js         Toolbar UI + reveal/copy logic (injected into pages)
 src/content.css        Toolbar styles
 src/background.js       Service worker: relays keyboard shortcuts
@@ -99,6 +116,7 @@ ViewPassword can read the value of password fields on any page, so the code is k
 ## Links
 
 - **Chrome Web Store:** [ViewPassword](https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea)
+- **Firefox Add-ons:** [ViewPassword](https://addons.mozilla.org/en-US/firefox/addon/viewpassword/)
 - **Website:** [nikba-creative-studio.github.io/ViewPassword](https://nikba-creative-studio.github.io/ViewPassword/)
 - **Privacy Policy:** [privacy.html](https://nikba-creative-studio.github.io/ViewPassword/privacy.html)
 - **Source:** [github.com/Nikba-Creative-Studio/ViewPassword](https://github.com/Nikba-Creative-Studio/ViewPassword)
