@@ -2,7 +2,7 @@
 
 > Reveal passwords and copy values from password or select fields with one click.
 
-**ViewPassword** is a lightweight Chrome, Edge, and Firefox extension (Manifest V3). A small toolbar appears beside supported fields so you can instantly copy or reveal their value.
+**ViewPassword** is a lightweight Chrome, Edge, Firefox, and Safari extension (Manifest V3). A small toolbar appears beside supported fields so you can instantly copy or reveal their value.
 
 - 📋 **Copy** — copy the field value to the clipboard
 - 👁 **Eye** — show / hide the field value
@@ -59,6 +59,20 @@ For Mozilla Add-ons submission, upload the same generated ZIP. The Firefox
 manifest declares that the extension collects no data and uses a non-persistent
 Manifest V3 background script.
 
+### Safari (macOS and iOS)
+
+Safari extensions ship inside a native Xcode app. To generate the complete
+macOS/iOS wrapper from the shared WebExtension source:
+
+1. Install Xcode and select it with `xcode-select`.
+2. Run `./scripts/build-safari.sh`.
+3. Open `dist/safari/ViewPassword Safari/ViewPassword Safari.xcodeproj` in Xcode.
+4. Select the macOS app or iOS app scheme, choose your signing team, then run.
+5. In Safari, enable ViewPassword under **Settings → Extensions**.
+
+The generated Xcode project is a build artifact in `dist/`; rerun the script
+whenever the shared extension files or Safari manifest change.
+
 ## Usage
 
 - Hover or focus any password field → the **copy** and **eye** icons appear beside it.
@@ -93,6 +107,7 @@ There are **no** network permissions — the extension cannot send data anywhere
 ```
 manifest.json          Extension manifest (MV3)
 firefox/manifest.json  Firefox-specific manifest and AMO metadata
+safari/manifest.json   Safari-specific WebExtension manifest
 scripts/               Browser-specific packaging scripts
 src/content.js         Toolbar UI + reveal/copy logic (injected into pages)
 src/content.css        Toolbar styles
