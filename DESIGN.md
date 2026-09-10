@@ -39,7 +39,7 @@ Headings remain plain: no gradients or text shadows. Never use decorative displa
 
 ## 4. Component Stylings
 
-Buttons are pill-shaped, purple, and receive hover, active, keyboard-focus, and disabled states. Secondary buttons use a neutral border. Cards use the surface color, a 1px border, 14px radius, and 22–24px padding. Functional features use consistent 24px outline SVG icons; browsers and stores use recognizable flat-color SVG marks. Emoji are not part of the interface. Navigation links use muted text and become purple/underlined on interaction. FAQ items use native `details`/`summary`, visible focus rings, and a rotating disclosure marker.
+Buttons are pill-shaped, purple, and receive hover, active, keyboard-focus, and disabled states. Secondary buttons use a neutral border. Cards use the surface color, a 1px border, 14px radius, and 22–24px padding. Functional features use consistent 24px outline SVG icons; browsers and stores use official flat-color vectors sourced from Simple Icons and Font Awesome Brands, stored locally. Emoji are not part of the interface. Navigation links use muted text and become purple/underlined on interaction. FAQ items use native `details`/`summary`, visible focus rings, and a rotating disclosure marker.
 
 ## 5. Layout Principles
 
