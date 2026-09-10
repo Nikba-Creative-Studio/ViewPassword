@@ -6,12 +6,13 @@
     <title>ViewPassword — Reveal &amp; Copy Passwords</title>
     <meta
       name="description"
-      content="A private Chrome, Edge, and Firefox extension for revealing passwords and copying values from password or select fields. 100% local."
+      content="A private Safari, Chrome, Edge, and Firefox extension for revealing passwords and copying field values. 100% local."
     />
     <link rel="icon" type="image/png" href="icon.png" />
     <style>
       :root {
         --blue: #6c4ce0;
+        --blue-rgb: 108, 76, 224;
         --blue-dark: #5638c4;
         --bg: #ffffff;
         --fg: #1c1c1e;
@@ -231,6 +232,68 @@
         color: var(--muted);
         margin: 0 0 18px;
       }
+      .install-note {
+        max-width: 760px;
+        margin: 22px auto 0;
+        padding: 16px 18px;
+        border: 1px solid rgba(var(--blue-rgb), 0.25);
+        border-radius: var(--radius);
+        background: rgba(var(--blue-rgb), 0.07);
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .install-note strong { color: var(--fg); }
+
+      /* FAQ */
+      .faq-list {
+        max-width: 760px;
+        margin: 0 auto;
+        display: grid;
+        gap: 12px;
+      }
+      .faq-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .faq-item summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 18px 52px 18px 20px;
+        font-weight: 600;
+        position: relative;
+      }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .faq-item summary::after {
+        content: "+";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--blue);
+        font-size: 24px;
+        font-weight: 400;
+        transition: transform 0.18s ease;
+      }
+      .faq-item[open] summary::after {
+        transform: translateY(-50%) rotate(45deg);
+      }
+      .faq-item summary:focus-visible,
+      .cta:focus-visible,
+      a:focus-visible {
+        outline: 3px solid rgba(var(--blue-rgb), 0.35);
+        outline-offset: 3px;
+      }
+      .faq-answer {
+        padding: 0 20px 20px;
+        color: var(--muted);
+        font-size: 14.5px;
+      }
+      .faq-answer p { margin: 0 0 10px; }
+      .faq-answer p:last-child { margin-bottom: 0; }
+      .faq-answer ol { margin: 8px 0 12px; padding-left: 22px; }
+      .faq-answer li { margin: 6px 0; }
       code,
       kbd {
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -281,6 +344,16 @@
         justify-content: center;
         flex-wrap: wrap;
       }
+      @media (max-width: 600px) {
+        .nav-links a:nth-child(3),
+        .nav-links a:nth-child(4) { display: none; }
+        .hero { padding-top: 52px; }
+        .cta-group .cta { width: 100%; justify-content: center; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition: none !important; }
+      }
     </style>
   </head>
   <body>
@@ -293,6 +366,7 @@
         <span class="nav-links">
           <a href="#features">Features</a>
           <a href="#install">Install</a>
+          <a href="#faq">FAQ</a>
           <a href="privacy.html">Privacy</a>
           <a href="https://github.com/Nikba-Creative-Studio/ViewPassword"
             >GitHub</a
@@ -309,9 +383,15 @@
         <p class="lead">
           ViewPassword adds a tiny toolbar beside password and select fields.
           Reveal a password or copy the current value with one click — now for
-          Chrome, Edge, Firefox Desktop, and Firefox for Android.
+          Safari on Mac, iPhone and iPad, plus Chrome, Edge, Firefox Desktop,
+          and Firefox for Android.
         </p>
         <div class="cta-group">
+          <a
+            class="cta"
+            href="https://apps.apple.com/app/viewpassword/id6809333122"
+            >Download on the App Store</a
+          >
           <a
             class="cta"
             href="https://chromewebstore.google.com/detail/aanjmpodookklklpfjpcmboanbmpppea"
@@ -365,10 +445,10 @@
           </div>
           <div class="card">
             <div class="emoji">🦊</div>
-            <h3>Chrome &amp; Firefox</h3>
+            <h3>Safari, Chrome &amp; Firefox</h3>
             <p>
-              Available for Chrome, Edge, Firefox Desktop, and Firefox for
-              Android from their official stores.
+              Available from the App Store, Chrome Web Store, and Firefox
+              Add-ons for desktop and mobile browsers.
             </p>
           </div>
           <div class="card">
@@ -400,6 +480,15 @@
         </p>
         <div class="install-grid">
           <div class="install-card">
+            <h3>Safari</h3>
+            <p>Available for Safari on Mac, iPhone, and iPad.</p>
+            <a
+              class="cta"
+              href="https://apps.apple.com/app/viewpassword/id6809333122"
+              >App Store</a
+            >
+          </div>
+          <div class="install-card">
             <h3>Chrome &amp; Edge</h3>
             <p>Install the latest stable version from the Chrome Web Store.</p>
             <a
@@ -417,6 +506,74 @@
               >Firefox Add-ons</a
             >
           </div>
+        </div>
+        <div class="install-note">
+          <strong>Safari requires one extra activation step.</strong> After
+          installing, enable ViewPassword in Safari and allow it on all
+          websites. See the <a href="#faq">Safari setup instructions</a>
+          below.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <h2>Frequently asked questions</h2>
+        <p class="section-sub">
+          Installation, permissions, and the details that help ViewPassword
+          work correctly.
+        </p>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>How do I install and activate ViewPassword in Safari on Mac?</summary>
+            <div class="faq-answer">
+              <ol>
+                <li>Install ViewPassword from the App Store and open the app once.</li>
+                <li>Open Safari, then choose <strong>Safari → Settings → Extensions</strong>.</li>
+                <li>Enable the checkbox next to <strong>ViewPassword</strong>.</li>
+                <li>Open ViewPassword's website access settings and choose <strong>Always Allow on Every Website</strong>.</li>
+                <li>Refresh any pages that were already open.</li>
+              </ol>
+              <p>Installation alone does not automatically grant access to every website; Safari requires you to approve this permission.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>How do I activate ViewPassword on iPhone or iPad?</summary>
+            <div class="faq-answer">
+              <ol>
+                <li>Install ViewPassword from the App Store and open the app once.</li>
+                <li>On iOS/iPadOS 18 or later, open <strong>Settings → Apps → Safari → Extensions</strong>. On earlier versions, open <strong>Settings → Safari → Extensions</strong>.</li>
+                <li>Select <strong>ViewPassword</strong> and turn it on.</li>
+                <li>Under Permissions, allow access on <strong>All Websites</strong>.</li>
+                <li>Return to Safari and refresh the page.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Why does Safari ask for access to all websites?</summary>
+            <div class="faq-answer">
+              <p>Password fields can appear on any website, so ViewPassword needs page access to place its copy and reveal controls beside those fields. The extension processes values locally, only when you use an action, and does not transmit browsing or password data.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>I installed the Safari extension, but the buttons do not appear. What should I check?</summary>
+            <div class="faq-answer">
+              <p>Confirm that ViewPassword is enabled, website access is set to <strong>Allow</strong> or <strong>Always Allow on Every Website</strong>, and the page was refreshed after activation. For Private Browsing, Safari requires the separate <strong>Allow in Private Browsing</strong> option.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Does ViewPassword read my saved password manager?</summary>
+            <div class="faq-answer">
+              <p>No. ViewPassword cannot open Safari, Chrome, or Firefox's encrypted password manager. It only works with a value already present in a field on the current webpage.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Is any password or browsing data collected?</summary>
+            <div class="faq-answer">
+              <p>No. ViewPassword has no analytics, remote servers, or network access. Copy and reveal actions are handled locally on your device.</p>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -440,6 +597,7 @@
       <div class="wrap">
         <div class="links">
           <a href="privacy.html">Privacy Policy</a>
+          <a href="https://apps.apple.com/app/viewpassword/id6809333122">App Store</a>
           <a href="https://addons.mozilla.org/en-US/firefox/addon/viewpassword/">Firefox Add-ons</a>
           <a href="https://github.com/Nikba-Creative-Studio/ViewPassword">GitHub</a>
           <a href="https://www.nikba.com">Nikba Creative Studio</a>
