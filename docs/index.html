@@ -213,9 +213,9 @@
       }
       .install-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 18px;
-        max-width: 760px;
+        max-width: 960px;
         margin: 0 auto;
       }
       .install-card {
@@ -349,6 +349,11 @@
         .nav-links a:nth-child(4) { display: none; }
         .hero { padding-top: 52px; }
         .cta-group .cta { width: 100%; justify-content: center; }
+        .install-grid { grid-template-columns: 1fr; }
+      }
+      @media (min-width: 601px) and (max-width: 760px) {
+        .install-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .install-card:last-child { grid-column: 1 / -1; }
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }

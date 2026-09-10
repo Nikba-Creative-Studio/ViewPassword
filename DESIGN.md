@@ -43,7 +43,7 @@ Buttons are pill-shaped, purple, and receive hover, active, keyboard-focus, and 
 
 ## 5. Layout Principles
 
-The main container is 960px with 24px side padding. Text-heavy content is capped at 760px. Sections use 56px vertical padding, cards use an 18px gap, and platform/install cards use a responsive `minmax(240px, 1fr)` grid.
+The main container is 960px with 24px side padding. Text-heavy content is capped at 760px. Sections use 56px vertical padding and cards use an 18px gap. The three platform/install cards share one equal-width row on desktop, wrap to two columns on tablet, and stack on mobile.
 
 ## 6. Depth & Elevation
 
