@@ -39,7 +39,7 @@ Headings remain plain: no gradients or text shadows. Never use decorative displa
 
 ## 4. Component Stylings
 
-Buttons are pill-shaped, purple, and receive hover, active, keyboard-focus, and disabled states. Secondary buttons use a neutral border. Cards use the surface color, a 1px border, 14px radius, and 22–24px padding. Navigation links use muted text and become purple/underlined on interaction. FAQ items use native `details`/`summary`, visible focus rings, and a rotating disclosure marker.
+Buttons are pill-shaped, purple, and receive hover, active, keyboard-focus, and disabled states. Secondary buttons use a neutral border. Cards use the surface color, a 1px border, 14px radius, and 22–24px padding. Functional features use consistent 24px outline SVG icons; browsers and stores use recognizable flat-color SVG marks. Emoji are not part of the interface. Navigation links use muted text and become purple/underlined on interaction. FAQ items use native `details`/`summary`, visible focus rings, and a rotating disclosure marker.
 
 ## 5. Layout Principles
 
@@ -61,6 +61,7 @@ Motion is restrained to 150–200ms color, transform, and disclosure transitions
 - Use semantic HTML and native controls.
 - Keep privacy language direct and factual.
 - Preserve dark-mode contrast.
+- Use inline SVG icons so the page has no icon-library network dependency.
 
 ### Don't
 - ❌ Hide Safari permissions in fine print.
@@ -71,6 +72,7 @@ Motion is restrained to 150–200ms color, transform, and disclosure transitions
 - ❌ Remove keyboard focus indicators.
 - ❌ Use color alone to communicate state.
 - ❌ Overload the hero with technical setup steps.
+- ❌ Use emoji as interface icons or decoration.
 
 ## 9. Responsive Behavior
 
